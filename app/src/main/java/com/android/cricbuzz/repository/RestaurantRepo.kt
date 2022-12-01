@@ -27,10 +27,10 @@ private val toJSONObject: ToJSONObject
          return if(serchText.isNullOrBlank()){
              allres
          }else{
-             allres = allres?.filter { res -> (res?.name)?.contains(serchText, false)!!
-                     || (res?.cuisineType)?.contains(serchText, false)!!
+             allres = allres?.filter { res -> (res?.name)?.contains(serchText, true)!!
+                     || (res?.cuisineType)?.contains(serchText, true)!!
                      || ((res?.categories)?.filter {cat->
-                 (cat?.menuItems)?.filter { menuItem ->  (menuItem?.name)?.contains(serchText, false)!! }?.size ?: 0 > 0
+                 (cat?.menuItems)?.filter { menuItem ->  (menuItem?.name)?.contains(serchText, true)!! }?.size ?: 0 > 0
              }?.size ?: 0 > 0)
              }
              getMenuFilter(allres,serchText)
@@ -50,13 +50,13 @@ private val toJSONObject: ToJSONObject
     private suspend fun getMenuFilter(allres: List<RestaurantModel.Restaurant?>?, serchText: String): List<RestaurantModel.Restaurant?>? {
        return allres?.map { res ->
             if(((res?.categories)?.filter {cat->
-                    (cat?.menuItems)?.filter { menuItem ->  (menuItem?.name)?.contains(serchText, false)!! }?.size ?: 0 > 0
+                    (cat?.menuItems)?.filter { menuItem ->  (menuItem?.name)?.contains(serchText, true)!! }?.size ?: 0 > 0
                 }?.size ?: 0 > 0)){
                 res?.categories = getMenuList(
                     res?.id ?: 0
                 )?.categories?.map { menu ->
                     val data = menu?.menuItems?.filter { menuItem ->
-                        (menuItem?.name)?.contains(serchText, false)!!
+                        (menuItem?.name)?.contains(serchText, true)!!
                     }
                     menu?.menuItems = data
                     menu
