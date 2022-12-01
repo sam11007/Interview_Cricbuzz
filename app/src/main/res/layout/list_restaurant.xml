@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="data"
+            type="com.android.cricbuzz.network.model.RestaurantModel.Restaurant" />
+
+        <variable
+            name="position"
+            type="int" />
+
+
+        <variable
+            name="mClickListener"
+            type="com.android.cricbuzz.views.restaurant.adapter.RestaurantAdapter.ClickListener" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="@{()->mClickListener.onClick(data,position)}"
+        android:layout_marginTop="20dp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="7dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/thumbImageView"
+                    android:layout_width="140dp"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/images" />
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/rv_restaurant_name"
+                    android:text="@{data.name}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_locality"
+                    android:text="@{data.neighborhood}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_Address"
+                    android:text="@{data.address}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13dp" />
+                <TextView
+                    android:id="@+id/tv_crusine_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.cuisineType}"
+                    android:textSize="13dp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
+                    android:numStars="5"
+                    android:progressBackgroundTint="#a8a8a8"
+                    android:progressTint="#06CD0E"
+                    android:scaleX="0.3"
+                    android:scaleY="0.3"
+                    android:stepSize="0.2"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

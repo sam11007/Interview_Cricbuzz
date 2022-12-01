@@ -1,0 +1,76 @@
+package com.android.cricbuzz.views.menu.foodAdapter
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.android.cricbuzz.databinding.ItemFoodBinding
+import com.android.cricbuzz.network.model.MenuModel
+import com.android.cricbuzz.views.menu.foodMenuAdapter.FoodMenuAdapter
+import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.scopes.FragmentScoped
+import javax.inject.Inject
+
+
+@FragmentScoped
+class FoodAdapter @Inject constructor(
+) :  ListAdapter<MenuModel.Category, FoodAdapter.ViewHolder>(UsersListDiffCallback()) {
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        val item = getItem(position)
+        holder.bind(item,position)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
+    class ViewHolder private constructor(private val binding: ItemFoodBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            item: MenuModel.Category,
+            position: Int
+        ) {
+            binding.data = item
+            binding.executePendingBindings()
+            binding.position=position
+            val foodMenu = FoodMenuAdapter()
+            binding.rvFoodMenu.adapter = foodMenu
+            var list = item.menuItems
+            foodMenu.submitList(list)
+        }
+
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemFoodBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
+    }
+
+    class UsersListDiffCallback : DiffUtil.ItemCallback<MenuModel.Category>() {
+        override fun areItemsTheSame(
+            oldItem: MenuModel.Category,
+            newItem: MenuModel.Category
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+        override fun areContentsTheSame(
+            oldItem: MenuModel.Category,
+            newItem: MenuModel.Category
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    class ClickListener @Inject constructor() {
+        var onItemClick: ((MenuModel.Category, position: Int) -> Unit)? = null
+        fun onClick(data: MenuModel.Category, position: Int) {
+            onItemClick?.invoke(data, position)
+        }
+    }
+}
