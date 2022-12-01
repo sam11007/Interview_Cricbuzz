@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.android.cricbuzz.databinding.FragmentRestaurantListBinding
 import com.android.cricbuzz.databinding.FragmentResturantDetailsBinding
 import com.android.cricbuzz.network.NetworkResource
+import com.android.cricbuzz.utils.getDrawable
 
 import com.android.cricbuzz.views.base.BaseFragment
 import com.android.cricbuzz.views.restaurant.adapter.RestaurantAdapter
@@ -86,6 +87,7 @@ class RestaurantDetailFragment : BaseFragment<FragmentResturantDetailsBinding>()
                                 daysList.add(DaysModel(1,"Sunday", days.sunday))
                             }
                         }
+                        binding?.imageView?.setImageResource((it?.data?.photograph ?: "")?.getDrawable())
                         daysAdapter.submitList(daysList)
                         restaurantMenuAdapter.submitList(it.data?.categories)
                     }

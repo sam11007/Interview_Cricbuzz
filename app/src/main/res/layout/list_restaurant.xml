@@ -57,7 +57,7 @@
                     android:layout_width="140dp"
                     android:layout_height="120dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/images" />
+                    android:src="@{data.photograph}" />
             </androidx.cardview.widget.CardView>
 
 

@@ -5,7 +5,7 @@
       "id":1,
       "name":"Mission Chinese Food",
       "neighborhood":"Manhattan",
-      "photograph":"1.jpg",
+      "photograph":"one.jpg",
       "address":"171 E Broadway, New York, NY 10002",
       "latlng":{
         "lat":40.713829,
@@ -46,7 +46,7 @@
       "id":2,
       "name":"Emily",
       "neighborhood":"Brooklyn",
-      "photograph":"2.jpg",
+      "photograph":"two.jpg",
       "address":"919 Fulton St, Brooklyn, NY 11238",
       "latlng":{
         "lat":40.683555,

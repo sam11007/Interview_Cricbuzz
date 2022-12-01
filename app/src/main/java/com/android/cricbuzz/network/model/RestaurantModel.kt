@@ -28,7 +28,7 @@ data class Restaurant(
     @Json(name = "operating_hours")
     val operatingHours: OperatingHours?= null,
     @Json(name = "photograph")
-    val photograph: String?= null,
+    val photograph: String?= "",
     @Json(name = "reviews")
     val reviews: List<Review?>?= emptyList(),
     var categories: List<MenuModel.Category?>? = emptyList(),
