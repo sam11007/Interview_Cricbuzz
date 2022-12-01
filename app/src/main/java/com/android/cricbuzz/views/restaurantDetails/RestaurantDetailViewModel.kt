@@ -22,6 +22,11 @@ class RestaurantDetailViewModel @Inject constructor(
 private var _restaurantDetails = MutableLiveData<NetworkResource<RestaurantModel.Restaurant>>()
     val restaurantDetails: LiveData<NetworkResource<RestaurantModel.Restaurant>> = _restaurantDetails
 
+    /**
+     * Fech All Restaurant Details
+     * @param restaurantId String
+     * @return null
+     */
      fun fetchAllRestaurantDetails(restaurantId: Int){
         viewModelScope.launch(Dispatchers.IO){
             val response = restaurantRepo.getAllRestaurantDetails(restaurantId)

@@ -12,6 +12,11 @@ import javax.inject.Inject
 class RestaurantRepo @Inject constructor(
 private val toJSONObject: ToJSONObject
 ) {
+    /**
+     * Fetch All Restaurant and food items according to the search ket
+     * @param searchableString String
+     * @return List<RestaurantModel.Restaurant?>?
+     */
  suspend fun getAllRestaurantList(serchText: String): List<RestaurantModel.Restaurant?>? {
      try{
          val allresturant = toJSONObject.processJsonFromFile(Constants.RESTAURANT_JSON, RestaurantModel.Response::class.java)
@@ -36,7 +41,12 @@ private val toJSONObject: ToJSONObject
      }
      return null
  }
-
+    /**
+     * Food Menu filter
+     * @param allres List<RestaurantModel.Restaurant?>?
+     * @param searchableString String
+     * @return List<RestaurantModel.Restaurant?>?
+     */
     private suspend fun getMenuFilter(allres: List<RestaurantModel.Restaurant?>?, serchText: String): List<RestaurantModel.Restaurant?>? {
        return allres?.map { res ->
             if(((res?.categories)?.filter {cat->
@@ -57,7 +67,11 @@ private val toJSONObject: ToJSONObject
             res
         }
     }
-
+    /**
+     * get only restaurant list with search text
+     * @param searchableString String
+     * @return List<RestaurantModel.Restaurant?>?
+     */
     suspend fun getRestaurantList(serchText: String?): List<RestaurantModel.Restaurant?>? {
         try{
             var allresturant = toJSONObject.processJsonFromFile(Constants.RESTAURANT_JSON, RestaurantModel.Response::class.java)
@@ -77,7 +91,11 @@ private val toJSONObject: ToJSONObject
         }
         return null
     }
-
+    /**
+     * get only restaurant Details accoring to resturant Id
+     * @param restaurantId Int
+     * @return RestaurantModel.Restaurant?
+     */
     suspend fun getAllRestaurantDetails(restaurantId: Int): RestaurantModel.Restaurant? {
         try {
             val restaurantList = getAllRestaurantList("")
@@ -87,7 +105,10 @@ private val toJSONObject: ToJSONObject
         }
         return null
     }
-
+    /**
+     * get only Menu List
+     * @return MenuModel.Response?
+     */
     suspend fun getAllMenuList(): MenuModel.Response? {
         try{
             val response = toJSONObject.processJsonFromFile(Constants.MENU_JSON, MenuModel.Response::class.java)
@@ -98,7 +119,11 @@ private val toJSONObject: ToJSONObject
         return null
     }
 
-
+    /**
+     * get only Menu Item List
+     * @param resturantId String
+     * @return MenuModel.Menu?
+     */
     suspend fun getMenuList(resturantId: Int): MenuModel.Menu? {
         try {
             val allmenu = getAllMenuList()

@@ -24,7 +24,11 @@ class MenuViewModel @Inject constructor(
     }
     private var _restaurantList = MutableLiveData<NetworkResource<List<RestaurantModel.Restaurant?>>>()
     val restaurantList: LiveData<NetworkResource<List<RestaurantModel.Restaurant?>>> = _restaurantList
-
+    /**
+     * Fetch All Restaurant and food items
+     * @param searchableString String
+     * @return null
+     */
      fun fetchAllRestaurantList(searchableString: String = ""){
         viewModelScope.launch(Dispatchers.IO){
 
