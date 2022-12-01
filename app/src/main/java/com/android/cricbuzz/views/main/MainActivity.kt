@@ -26,12 +26,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val navController = findNavController(R.id.main_nav_container)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.menu_list, R.id.restaurant_list
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.menu_list, R.id.restaurant_list
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
